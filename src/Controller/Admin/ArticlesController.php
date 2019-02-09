@@ -1,7 +1,7 @@
 <?php
 // src/Controller/ArticlesController.php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Controller\AppController;
 
@@ -14,9 +14,12 @@ class ArticlesController extends AppController
 
         $this->loadComponent('Paginator');
         $this->loadComponent('Flash'); // Include the FlashComponent
-		$this->Auth->allow(['tags']);
+		//$this->Auth->allow(['tags']);
 		
 		$this->viewBuilder()->setLayout('backend');
+		
+		$this->java = 'default';
+		$this->css = '';
     }
 
     public function index()
@@ -24,6 +27,11 @@ class ArticlesController extends AppController
         $articles = $this->Paginator->paginate($this->Articles->find());
         $this->set(compact('articles'));
 		
+		$this->java = 'table';
+		$this->set('java', $this->java);
+		
+		$this->css = 'vendor/datatables/dataTables.bootstrap4.min.css';
+		$this->set('css', $this->css);
     }
 
     public function view($slug)

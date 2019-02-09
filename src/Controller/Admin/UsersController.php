@@ -1,5 +1,5 @@
 <?php
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Controller\AppController;
 
@@ -16,8 +16,10 @@ class UsersController extends AppController
 	public function initialize()
 	{
 		parent::initialize();
-		//$this->Auth->allow(['logout']);
-		$this->Auth->allow(['logout', 'add']);
+		$this->Auth->allow(['logout']);
+		//$this->Auth->allow(['logout', 'add']);
+		
+		$this->viewBuilder()->setLayout('backend');
 	}
 
 
@@ -29,7 +31,6 @@ class UsersController extends AppController
     public function index()
     {
         $users = $this->paginate($this->Users);
-
         $this->set(compact('users'));
     }
 
@@ -123,6 +124,8 @@ class UsersController extends AppController
 			}
 			$this->Flash->error('Your username or password is incorrect.');
 		}
+		
+		$this->viewBuilder()->setLayout('login');
 	}
 
 	public function logout()
@@ -134,14 +137,14 @@ class UsersController extends AppController
 	public function isAuthorized($user = null)
     {
         // Any registered user can access public functions
-        if (!$this->request->getParam('prefix')) {
+        /*if (!$this->request->getParam('prefix')) {
             return true;
         }
 
         // Only admins can access admin functions
         if ($this->request->getParam('prefix') === 'admin') {
             return (bool)($user['role'] === 'admin');
-        }
+        }*/
 
         // Default deny
         return false;
