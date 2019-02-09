@@ -1,0 +1,24 @@
+/*
+ * Serbian localization
+ */
+ 
+/*
+ * Backend
+ */
+ 
+//------------------------>Common<------------------------\\
+msgid "Add"
+msgstr "Dodaj"
+
+msgid "Edit"
+msgstr "Izmeni"
+
+msgid "Delete"
+msgstr "Obriši"
+
+msgid "Are you sure?"
+msgstr "Da li ste sigurni?"
+ 
+//------------------------>Articles<------------------------\\
+msgid "Aticles"
+msgstr "Artikli"
