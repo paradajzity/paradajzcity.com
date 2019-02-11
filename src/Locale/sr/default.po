@@ -18,6 +18,10 @@ msgstr "Obriši"
 
 msgid "Are you sure?"
 msgstr "Da li ste sigurni?"
+
+//------------------------>Users<------------------------\\
+msgid "Welcome Back!"
+msgstr "Dobrodošli!"
  
 //------------------------>Articles<------------------------\\
 msgid "Aticles"

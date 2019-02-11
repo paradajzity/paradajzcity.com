@@ -56,8 +56,7 @@ class AppController extends Controller
             'authenticate' => [
                 'Form' => [
                     'fields' => [
-                        'username' => 'email',
-                        'password' => 'password'
+                        'userModel' => 'Users'
                     ]
                 ]
             ],
@@ -73,12 +72,19 @@ class AppController extends Controller
 
         // Allow the display action so our PagesController
         // continues to work. Also enable the read only actions.
-        //$this->Auth->allow(['display', 'view', 'index']);
+        $this->Auth->allow(['display']);
     }
 	
 	public function isAuthorized($user)
 	{
 		// By default deny access.
 		return false;
+	}
+	
+	public function loadVar($var){
+		
+		foreach ($var as $key => $value) {
+			$this->set($key, $value);
+		}
 	}
 }

@@ -19,9 +19,10 @@ class UsersController extends AppController
 		$this->Auth->allow(['logout']);
 		//$this->Auth->allow(['logout', 'add']);
 		
+		//layout
 		$this->viewBuilder()->setLayout('backend');
+		$this->loadVar(['java' => 'default', 'css' => '']);
 	}
-
 
     /**
      * Index method
@@ -115,14 +116,19 @@ class UsersController extends AppController
     }
 	
 	public function login()
-	{
+	{		
 		if ($this->request->is('post')) {
-			$user = $this->Auth->identify();
+			$user = $this->Users->identify($this->request->data);
 			if ($user) {
 				$this->Auth->setUser($user);
 				return $this->redirect($this->Auth->redirectUrl());
+				if($this->Auth->redirectUrl()!='/')
+					return $this->redirect($this->Auth->redirectUrl());
+				else
+					return $this->redirect([ 'controller' => 'AdminPages', 'action' => 'dashboard']);
+			} else {
+				$this->Flash->error(__('Username or password is incorrect'));
 			}
-			$this->Flash->error('Your username or password is incorrect.');
 		}
 		
 		$this->viewBuilder()->setLayout('login');
@@ -130,23 +136,12 @@ class UsersController extends AppController
 
 	public function logout()
 	{
-		$this->Flash->success('You are now logged out.');
+		$this->Flash->success(__('You are now logged out.'));
 		return $this->redirect($this->Auth->logout());
 	}
 	
 	public function isAuthorized($user = null)
     {
-        // Any registered user can access public functions
-        /*if (!$this->request->getParam('prefix')) {
-            return true;
-        }
-
-        // Only admins can access admin functions
-        if ($this->request->getParam('prefix') === 'admin') {
-            return (bool)($user['role'] === 'admin');
-        }*/
-
-        // Default deny
-        return false;
+        return true;
     }
 }

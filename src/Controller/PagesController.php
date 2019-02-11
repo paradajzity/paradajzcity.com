@@ -66,4 +66,9 @@ class PagesController extends AppController
             throw new NotFoundException();
         }
     }
+	
+	public function isAuthorized($user)
+	{
+		return true;
+	}
 }

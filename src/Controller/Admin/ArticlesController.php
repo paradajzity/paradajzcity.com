@@ -16,10 +16,9 @@ class ArticlesController extends AppController
         $this->loadComponent('Flash'); // Include the FlashComponent
 		//$this->Auth->allow(['tags']);
 		
+		//layout
 		$this->viewBuilder()->setLayout('backend');
-		
-		$this->java = 'default';
-		$this->css = '';
+		$this->loadVar(['java' => 'default', 'css' => '']);
     }
 
     public function index()
@@ -27,11 +26,7 @@ class ArticlesController extends AppController
         $articles = $this->Paginator->paginate($this->Articles->find());
         $this->set(compact('articles'));
 		
-		$this->java = 'table';
-		$this->set('java', $this->java);
-		
-		$this->css = 'vendor/datatables/dataTables.bootstrap4.min.css';
-		$this->set('css', $this->css);
+		$this->loadVar(['java' => 'table', 'css' => 'vendor/datatables/dataTables.bootstrap4.min.css']);
     }
 
     public function view($slug)
@@ -117,7 +112,7 @@ class ArticlesController extends AppController
 	
 	public function isAuthorized($user)
 	{
-		$action = $this->request->getParam('action');
+		/*$action = $this->request->getParam('action');
 		// The add and tags actions are always allowed to logged in users.
 		if (in_array($action, ['add', 'tags'])) {
 			return true;
@@ -132,6 +127,8 @@ class ArticlesController extends AppController
 		// Check that the article belongs to the current user.
 		$article = $this->Articles->findBySlug($slug)->first();
 
-		return $article->user_id === $user['id'];
+		return $article->user_id === $user['id'];*/
+		// tmp
+		return true;
 	}
 }
