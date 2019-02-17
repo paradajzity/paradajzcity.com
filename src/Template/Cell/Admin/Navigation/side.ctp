@@ -11,6 +11,7 @@
 	<div class="sidebar-brand-text mx-3">Tomato CMS</div>
   </a>
 
+  <? //navigation generator ?>
   <?php foreach($nav as $index => $key):?>
 	
 	<?php if($key=='divider'): ?>
@@ -19,7 +20,7 @@
 		
 	<?php endif; ?>
 	
-	<?php if(isset($key['active_element'])): ?>
+	<?php if(isset($key['active_element']) && ($key['active_element']['show'])): ?>
 		<!-- Nav Item - Dashboard -->
 		<?php if($key['active_element']['icon_class'] !=''){
 		  $text = '
