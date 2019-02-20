@@ -4,52 +4,54 @@
  * @var \App\Model\Entity\User[]|\Cake\Collection\CollectionInterface $users
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New User'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Articles'), ['controller' => 'Articles', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Article'), ['controller' => 'Articles', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="users index large-9 medium-8 columns content">
-    <h3><?= __('Users') ?></h3>
-    <table cellpadding="0" cellspacing="0">
-        <thead>
-            <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('email') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('password') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($users as $user): ?>
-            <tr>
-                <td><?= $this->Number->format($user->id) ?></td>
-                <td><?= h($user->email) ?></td>
-                <td><?= h($user->password) ?></td>
-                <td><?= h($user->created) ?></td>
-                <td><?= h($user->modified) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $user->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
-    </div>
+<!-- Page Heading -->
+<h1 class="h3 mb-2 text-gray-800"><?= __('Users') ?></h1>
+
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+	<div class="card-header py-3">
+		<h6 class="m-0 font-weight-bold text-primary"><?= __('Users') ?></h6>
+	</div>
+	<div class="card-body">
+		<div class="table-responsive">
+			<div class="d-sm-flex align-items-center justify-content-between mb-4">
+				<div class="h3 mb-0"></div>
+				<?= $this->Html->link(
+					'<i class="fas fa-user-plus fa-sm text-white-50"></i> '
+					.__('Add User'),
+				   ['action' => 'add'],
+				   ['class' => 'd-none d-sm-inline-block btn btn-sm btn-primary shadow-sm', 'escape' => false]
+				) ?>
+			</div>
+			<div class="my-4"></div>
+			<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+				<thead>
+					<tr>
+						<th><?= __('Id')?></th>
+						<th><?= __('Username')?></th>
+						<th><?= __('Email')?></th>
+						<th><?= __('Priority')?></th>
+						<th><?= __('Created')?></th>
+						<th><?= __('Action')?></th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php foreach ($users as $user): ?>
+					<tr>
+						<td><?= $user->id ?></td>
+						<td><?= $user->username ?></td>
+						<td><?= $user->email ?></td>
+						<td><?= $user->priority ?></td>
+						<td><?= $user->created->format(DATE_RFC850) ?></td>
+						<td class="actions">
+							<?= $this->Html->link('<i class="fas fa-user-edit fa-fw"></i>', ['action' => 'edit', $user->id], ['title' => __('Edit'), 'escape' => false]) ?>
+							<?= $this->Form->postLink('<i class="fas fa-fw fa-trash-alt"></i>', ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id), 'escape' => false]) ?>
+						</td>
+					</tr>
+					<?php endforeach; ?>
+				</tbody>
+			</table>
+		</div>
+	</div>
 </div>
+

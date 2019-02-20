@@ -11,17 +11,28 @@
 	<div class="sidebar-brand-text mx-3">Tomato CMS</div>
   </a>
 
-  <? //navigation generator ?>
   <?php foreach($nav as $index => $key):?>
 	
 	<?php if($key=='divider'): ?>
 		<!-- Divider -->
 		<hr class="sidebar-divider my-0">
-		
+	<?php endif; ?>
+	
+	<?php if(isset($key['heading']) && ($key['heading']['show'])): ?>
+	  <!-- Divider -->
+	  <hr class="sidebar-divider">
+	  <!-- Heading -->
+	  <div class="sidebar-heading">
+		<?php if($key['heading']['icon_class'] !=''): ?>
+			<i class="<?= $key['heading']['icon_class'] ?>"></i>
+			<span><?= $key['heading']['text'] ?></span>
+		<?php endif; ?>
+		<?= $key['heading']['text'] ?>
+	  </div>
 	<?php endif; ?>
 	
 	<?php if(isset($key['active_element']) && ($key['active_element']['show'])): ?>
-		<!-- Nav Item - Dashboard -->
+		<!-- Nav Item -->
 		<?php if($key['active_element']['icon_class'] !=''){
 		  $text = '
 			<i class="'.$key['active_element']['icon_class'].'"></i>
